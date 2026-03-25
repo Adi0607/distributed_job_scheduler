@@ -1,0 +1,37 @@
+spring:
+  datasource:
+    url: jdbc:tc:postgresql:15:///jobscheduler?TC_REUSABLE=true
+    username: postgres
+    password: postgres
+    driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+  flyway:
+    enabled: true
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+scheduler:
+  batch-size: 50
+  poll-interval-ms: 5000
+  worker:
+    core-pool-size: 5
+    max-pool-size: 10
+    queue-capacity: 50
+
+handlers:
+  email:
+    failure-rate: 0.0
+    min-delay-ms: 0
+    max-delay-ms: 10
+  http-callback:
+    connect-timeout-ms: 5000
+    read-timeout-ms: 10000
+
+logging:
+  level:
+    com.jobscheduler: DEBUG
